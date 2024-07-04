@@ -1,0 +1,157 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    <title>About Us - Your Blogging Website</title>
+{% endblock %}
+{% load static %}
+{% block content %}
+<style>
+    body {
+        font-family: 'Roboto', sans-serif;
+        font-size: 16px;
+    }
+
+    .aboutus-section {
+        padding: 90px 0;
+    }
+
+    .aboutus-title {
+        font-size: 30px;
+        letter-spacing: 0;
+        line-height: 32px;
+        margin: 0 0 39px;
+        padding: 0 0 11px;
+        position: relative;
+        text-transform: uppercase;
+        color: #000;
+    }
+
+    .aboutus-title::after {
+        background: #fdb801 none repeat scroll 0 0;
+        bottom: 0;
+        content: "";
+        height: 2px;
+        left: 0;
+        position: absolute;
+        width: 54px;
+    }
+
+    .aboutus-text {
+        color: #606060;
+        font-size: 16px;
+        line-height: 24px;
+        margin: 0 0 35px;
+    }
+
+    .aboutus-more {
+        border: 1px solid #fdb801;
+        border-radius: 25px;
+        color: #fdb801;
+        display: inline-block;
+        font-size: 14px;
+        font-weight: 700;
+        letter-spacing: 1px;
+        padding: 7px 20px;
+        text-transform: uppercase;
+        transition: all 0.3s ease;
+    }
+
+    .aboutus-more:hover {
+        background-color: #fdb801;
+        color: #fff;
+        text-decoration: none;
+    }
+
+    .feature .feature-box .iconset {
+        background: #fff;
+        float: left;
+        position: relative;
+        width: 18%;
+        text-align: center;
+        border: 1px solid #fdb801;
+        border-radius: 50%;
+        height: 70px;
+        line-height: 70px;
+        font-size: 32px;
+        color: #fdb801;
+    }
+
+    .feature .feature-box .feature-content {
+        float: left;
+        padding-left: 28px;
+        width: 78%;
+    }
+
+    .feature .feature-box .feature-content h4 {
+        color: #0f0f0f;
+        font-size: 20px;
+        letter-spacing: 0;
+        line-height: 28px;
+        margin: 0 0 10px;
+    }
+
+    .feature .feature-box .feature-content p {
+        color: #606060;
+        font-size: 14px;
+        line-height: 22px;
+        margin: 0;
+    }
+</style>
+
+<div class="aboutus-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3 col-sm-6 col-xs-12">
+                <div class="aboutus">
+                    <h2 class="aboutus-title">About Us</h2>
+                    <p class="aboutus-text">
+                        Welcome to Your Blogging Website, where we are dedicated to bringing you insightful and engaging content from a variety of topics. Whether you are passionate about technology, business, lifestyle, or culture, we aim to provide a platform for sharing knowledge and ideas.
+                    </p>
+                    <p class="aboutus-text">
+                        Our team is committed to delivering reliable and quality content that enriches your reading experience. Join our community today and explore the world of captivating blogs!
+                    </p>
+                </div>
+            </div>
+            
+            <div class="col-md-5 col-sm-6 col-xs-12">
+                <div class="feature">
+                    <div class="feature-box">
+                        <div class="clearfix">
+                            <div class="iconset">
+                                <span class="glyphicon glyphicon-heart icon"></span>
+                            </div>
+                            <div class="feature-content">
+                                <h4>Work with Passion</h4>
+                                <p>Our team works with passion to deliver meaningful and engaging content that resonates with our readers.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="feature-box">
+                        <div class="clearfix">
+                            <div class="iconset">
+                                <span class="glyphicon glyphicon-ok icon"></span>
+                            </div>
+                            <div class="feature-content">
+                                <h4>Reliable Content</h4>
+                                <p>We ensure our content is reliable and up-to-date, providing valuable insights and information to our audience.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="feature-box">
+                        <div class="clearfix">
+                            <div class="iconset">
+                                <span class="glyphicon glyphicon-user icon"></span>
+                            </div>
+                            <div class="feature-content">
+                                <h4>Community Focus</h4>
+                                <p>We value our community and strive to create a welcoming environment for readers and contributors alike.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

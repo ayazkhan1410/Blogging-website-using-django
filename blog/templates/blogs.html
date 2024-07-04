@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+<title>{{ category.name }} Blogs</title>
+{% endblock %}
+<br>
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            <h2 class="mb-4">{{ category.name }} Blogs</h2>
+            {% for blog in blog_obj %}
+            <div class="card mb-3 shadow-sm">
+                {% if blog.image %}
+                <img src="{{ blog.image.url }}" class="card-img-top" alt="{{ blog.title }}">
+                {% endif %}
+                <div class="card-body">
+                    <h5 class="card-title">{{ blog.title }}</h5>
+                    <p class="card-text">{{ blog.description|safe|slice:":160" }}
+                        {% if blog.description|length > 160 %}
+                        ...
+                        {% endif %}</p>
+                    <p class="card-text"><small class="text-muted">{{ blog.created_at }}</small></p>
+                    <a href="{% url 'blog-detail' blog.slug %}" class="btn btn-primary">Read more</a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+       
+        <div class="col-12 col-md-4">
+            <br>
+            <!-- Search widget-->
+            <div class="card mb-4 shadow-sm">
+                <div class="card-header">Search</div>
+                <div class="card-body">
+                    <form id="search-form" method="post">
+                        {% csrf_token %}
+                        <div class="input-group">
+                            <input class="form-control" name="search" type="text" placeholder="Enter search term..." aria-label="Enter search term..." aria-describedby="button-search">
+                            <button class="btn btn-primary" id="button-search" type="submit">Go!</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Categories widget-->
+            <div class="card mb-4 shadow-sm">
+                <div class="card-header">Categories</div>
+                <div class="card-body">
+                    <div class="row">
+                        {% for cat in active_category %}
+                        <div class="col-sm-6">
+                            <ul class="list-unstyled mb-0">
+                                <li><a href="{% url 'blog-by-category' cat.slug %}">{{ cat.name }}</a></li>
+                            </ul>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

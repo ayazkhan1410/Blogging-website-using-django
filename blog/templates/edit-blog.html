@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% block title %}
+<title>Edit Blog</title>
+{% endblock %}
+{% block content %}
+
+<div class="container mt-5">
+    {% if messages %}
+    <div class="alert alert-success" role="alert">
+        {% for message in messages %}
+            {{ message }}
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    <h1 class="mb-4">Edit Blog</h1>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <div class="form-group mb-3">
+            <label for="category">Category</label>
+            <select name="category" class="form-control" id="category" required>
+                {% for category in categories %}
+                    <option value="{{ category.id }}" {% if edit_obj.category.id == category.id %}selected{% endif %}>
+                        {{ category.name }}
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="form-group mb-3">
+            <label for="title">Title</label>
+            <input type="text" name="title" class="form-control" id="title" value="{{ edit_obj.title }}" required>
+        </div>
+
+        <div class="form-group mb-3">
+            <label for="author_name">Author Name</label>
+            <input type="text" name="author_name" class="form-control" id="author_name" value="{{ edit_obj.author_name }}" required>
+        </div>
+
+        <div class="form-group mb-3">
+            <label for="description">Content</label>
+            <textarea name="description" class="form-control" id="content" required>{{ edit_obj.description|safe }}</textarea>
+        </div>
+
+        <div class="form-group mb-3">
+            <label for="image">Blog Image</label>
+            <input type="file" name="image" class="form-control" id="image">
+        </div>
+
+        <button type="submit" class="btn btn-primary">Update Blog</button>
+
+    </form>
+</div>
+
+<!-- Load CKEditor script -->
+<script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
+<script>
+    CKEDITOR.replace('content');
+</script>
+
+{% endblock %}

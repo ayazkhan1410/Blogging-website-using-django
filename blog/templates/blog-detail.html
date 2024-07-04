@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}<title>{{blog_slug.title}} </title> {% endblock %}
+{% block content %}
+        <!-- Page content-->
+        <div class="container mt-5">
+            <div class="row">
+                <div class="col-lg-8">
+                    <!-- Post content-->
+                    <article>
+                        <!-- Post header-->
+                        <header class="mb-4">
+                            <!-- Post title-->
+                            <h1 class="fw-bolder mb-1">{{blog_slug}}!</h1>
+                            <!-- Post meta content-->
+                            <div class="text-muted fst-italic mb-2"></div>
+                            <!-- Post categories-->
+                            <a class="badge bg-secondary text-decoration-none link-light" href="#!"> {{ blog_slug.category.name }}</a>
+                            
+                        </header>
+                        <!-- Preview image figure-->
+                        <figure class="mb-4"><img class="img-fluid rounded" src="{{blog_slug.image.url}}" alt="..." /></figure>
+                        <!-- Post content-->
+                        <section class="mb-5">
+                            <p class="fs-5 mb-4">{{blog_slug.description|safe}}</p>
+                        </section>
+                    </article>
+
+
+                  
+                   <!-- Comments section -->
+                   <section class="mb-5">
+                    <div class="card bg-light">
+                        <div class="card-body">
+                            <!-- Comment form -->
+                            <form class="mb-4" method="post">
+                                {% csrf_token %}
+                                <div class="form-group">
+                                    <textarea class="form-control mb-2" name="comment" rows="3" placeholder="Join the discussion and leave a comment!" required></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Post Comment</button>
+                            </form>
+                            {% if messages %}
+                                <div class="alert alert-success">
+                                    {% for message in messages %}
+                                        {{ message }}
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                            <!-- Comments list -->
+                            {% for comment in comments %}
+                                <div class="d-flex mb-4">
+                                    <!-- Parent comment -->
+                                 
+                                    <div class="ms-3">
+                                        {% if comment.user.first_name %}
+                                            <div class="fw-bold">{{ comment.user.first_name }}</div>
+                                        {% else %}
+                                            <div class="fw-bold">{{ comment.user.email }}</div>
+                                        {% endif %}
+                                        {{ comment.comment }}
+                                        <div class="text-muted">{{ comment.created_at|date:"F j, Y" }}</div>
+                                        {% if request.user == comment.user %}
+                                            <form action="{% url 'delete_comment' comment.id %}" method="post" style="display:inline;">
+                                                {% csrf_token %}
+                                                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                            </form>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            {% empty %}
+                                <p>No comments yet.</p>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </section>
+            </div>
+                <!-- Side widgets-->
+               
+                </div>
+            </div>
+        </div>
+{% endblock %}
